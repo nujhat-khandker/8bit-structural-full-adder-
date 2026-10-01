@@ -1,0 +1,37 @@
+  
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+
+entity full_adder_8bit is
+
+ Port ( A    : in  STD_LOGIC_VECTOR (7 downto 0);
+           B    : in  STD_LOGIC_VECTOR (7 downto 0);
+           Cin  : in  STD_LOGIC;
+           Sum  : out STD_LOGIC_VECTOR (7 downto 0);
+           Cout : out STD_LOGIC );
+
+ end full_adder_8bit;
+
+architecture Structural of full_adder_8bit is
+component full_adder
+        Port ( A    : in  STD_LOGIC;
+               B    : in  STD_LOGIC;
+               Cin  : in  STD_LOGIC;
+               Sum  : out STD_LOGIC;
+               Cout : out STD_LOGIC );
+    end component;
+
+    signal C : STD_LOGIC_VECTOR (6 downto 0);
+begin
+FA0: full_adder port map (A => A(0), B => B(0), Cin => Cin,  Sum => Sum(0), Cout => C(0));
+FA1: full_adder port map (A => A(1), B => B(1), Cin => C(0), Sum => Sum(1), Cout => C(1));
+FA2: full_adder port map (A => A(2), B => B(2), Cin => C(1), Sum => Sum(2), Cout => C(2));
+FA3: full_adder port map (A => A(3), B => B(3), Cin => C(2), Sum => Sum(3), Cout => C(3));
+FA4: full_adder port map (A => A(4), B => B(4), Cin => C(3), Sum => Sum(4), Cout => C(4));
+FA5: full_adder port map (A => A(5), B => B(5), Cin => C(4), Sum => Sum(5), Cout => C(5));
+FA6: full_adder port map (A => A(6), B => B(6), Cin => C(5), Sum => Sum(6), Cout => C(6));
+FA7: full_adder port map (A => A(7), B => B(7), Cin => C(6), Sum => Sum(7), Cout => Cout);
+
+end Structural;
+
